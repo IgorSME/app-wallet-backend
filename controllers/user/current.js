@@ -1,11 +1,16 @@
+const { Transaction } = require("../../models");
 const current = async (req, res) => {
-  const { name, email, userBalance } = req.user;
+  const { _id, name, email, userBalance } = req.user;
+  
+  const transactions =await Transaction.find({ owner: _id });
+
   res.json({
     user: {
       name,
       email,
       userBalance,
     },
+    transactions,
   });
 };
 
