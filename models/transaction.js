@@ -5,8 +5,10 @@ const transactionSchema = new Schema(
   {
     date: {
       type: Date,
-      default: Date.now(),
+      require: true,
     },
+    month: Number,
+    year: Number,
     type: {
       type: String,
       enum: ["income", "expense"],
@@ -47,7 +49,7 @@ const transactionSchema = new Schema(
 );
 
 const joiTransactionSchema = Joi.object({
-  date: Joi.date(),
+  date: Joi.date().timestamp("unix"),
   type: Joi.string(),
   category: Joi.string(),
   comment: Joi.string(),
