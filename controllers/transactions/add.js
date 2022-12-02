@@ -1,20 +1,22 @@
-const { User, Transaction } = require("../../models")
+const { User, Transaction } = require("../../models");
 
 const add = async (req, res) => {
-const {type,sum}=req.body
+  const { type, sum, date } = req.body;
   const { _id, userBalance } = req.user;
 
-    const newBalance =
-      type === "income" ? userBalance + sum : userBalance - sum;
-    
-    const transaction = await Transaction.create({
-      ...req.body,
-      owner: _id,
-      balanceAfterTransaction: newBalance,
-    });
+  const year = new Date(date).getFullYear();
+  const month = new Date(date).getMonth() + 1;
 
-  
-    
+  const newBalance = type === "income" ? userBalance + sum : userBalance - sum;
+
+  const transaction = await Transaction.create({
+    ...req.body,
+    owner: _id,
+    balanceAfterTransaction: newBalance,
+    month,
+    year,
+  });
+
   if (transaction) {
     const updatedUser = await User.findByIdAndUpdate(_id, {
       $push: { userTransaction: transaction._id },
