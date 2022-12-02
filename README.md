@@ -1,5 +1,5 @@
 # app-wallet-backend
-`BASE_URL:"http://localhost:3333/"`
+`BASE_URL:"https://app-wallet.onrender.com"`
 ## ENDPOINTS
 ### AUTH
 ----------------------------------------------------------------------
