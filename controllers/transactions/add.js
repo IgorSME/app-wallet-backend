@@ -1,4 +1,5 @@
 const { User, Transaction } = require("../../models");
+const {requestError} =require("../../helpers")
 
 const add = async (req, res) => {
   const { type, sum, date } = req.body;
@@ -8,6 +9,10 @@ const add = async (req, res) => {
   const month = new Date(date).getMonth() + 1;
 
   const newBalance = type === "income" ? userBalance + sum : userBalance - sum;
+  
+  if (newBalance < 0) {
+    throw requestError(400, "your balance is less than the transaction amount");
+  }
 
   const transaction = await Transaction.create({
     ...req.body,
