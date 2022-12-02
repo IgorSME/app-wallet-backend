@@ -7,5 +7,6 @@ const { transactions: ctrl } = require("../../controllers")
 
 router.post("/", auth, validation(joiTransactionSchema), ctrlWrapper(ctrl.add));
 router.get("/", auth, ctrlWrapper(ctrl.getAll));
+router.get("/statistic", auth, ctrlWrapper(ctrl.statistic));
 
 module.exports = router;
