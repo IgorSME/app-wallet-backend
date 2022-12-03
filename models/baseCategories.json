@@ -1,0 +1,38 @@
+[
+    {
+        "_id": "1",
+        "type": "expense",
+        "categoryName": "other"
+    },
+    {
+        "_id": "2",
+        "type": "expense",
+        "categoryName": "food"
+    },
+    {
+        "_id": "3",
+        "type": "expense",
+        "categoryName": "car"
+    },
+    {
+        "_id": "4",
+        "type": "expense",
+        "categoryName": "fun"
+    },
+    {
+        "_id": "5",
+        "type": "expense",
+        "categoryName": "ЗСУ"
+    },
+    {
+        "_id": "6",
+        "type": "income",
+        "categoryName": "regular"
+    },
+    {
+        "_id": "7",
+        "type": "income",
+        "categoryName": "irregular"
+    }
+   
+]
