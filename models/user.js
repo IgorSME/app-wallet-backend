@@ -21,11 +21,16 @@ const userSchema = new Schema(
     userTransaction: {
       type: Array,
       default: [],
-      ref: "transactions",
+      ref: "transaction",
+    },
+    userCategory: {
+      type: Array,
+      default: [],
+      ref: "category",
     },
     userBalance: {
       type: Number,
-      default:0
+      default: 0,
     },
     accessToken: {
       type: String,

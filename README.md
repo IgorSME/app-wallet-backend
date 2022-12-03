@@ -21,15 +21,15 @@
 * body: 
     ``` js
         {
-        name:"userName",
-        email:"user@gmail.com",
-        password:password
+        name:"userName",*
+        email:"user@gmail.com",*
+        password:password*
         } 
 * response :   
   ``` js
       user: {
-      name:"userName",
-      email:"user@gmail.com",
+      name:"userName",*
+      email:"user@gmail.com",*
     },
 -------------------------------------  
 
@@ -67,7 +67,7 @@
 * body:
 ``` js 
 
-{refreshToken:"refreshToken*******************************************"}
+{refreshToken:"refreshToken*******************************************"*}
 
 ```
 * response : 
@@ -89,55 +89,48 @@
 ``` js 
           user: {     
              name:"userName",
-            email:user@gmail.com",
-            userBalance:userBalance
+            email:"user@gmail.com",
+            userBalance:userBalance,
+            userCategory:[array of custom Users category]
             transactions:[array of transactions]
             },
 ```
 ----------------------------
 
 ### TRANSACTIONS
-#### Categories
-      [ "food",
-        "car",
-        "other",
-        "cats",
-        "educations",
-        "ЗСУ",
-        "fun",
-        "travel",]
-------------------------
-
+-----------------------------------------------------
 #### ADD
 `/api/transactions`
 * method:POST
 * body:
 ``` js 
 {
- "date":"date"`(UNIX Format)`
-"type":"expense",`("expense"||"income")`
-"category":"food",`("food"||"car"||"other"||"cats"||"educations"||"ЗСУ"||"fun"||"travel")`
+ "date":"date"`(UNIX Format)`*
+"type":"expense",`("expense"||"income")`*
+"category":"string"*
 "comment":"text comment" `(String)`
-"sum":1000 `(Number)`
+"sum":1000 `(Number)`*
     }
     
 ```
 
 * response :
 ``` js 
-"data": {
+ "data": {
         "transaction": {
-            "date": "2022-12-01T11:40:57.894Z",
+            "date": "2022-03-01T12:25:00.000Z",
+            "month": 3,
+            "year": 2022,
             "type": "expense",
             "category": "food",
-            "owner": "6387c675942ce7fe9c94c962",
+            "owner": "638b11225c6e2eeb2d95e90e",
             "comment": "",
             "sum": 1000,
-            "balanceAfterTransaction": 4200,
-            "_id": "638892e838e3a5b290db2ed4",
-            "createdAt": "2022-12-01T11:41:28.624Z",
-            "updatedAt": "2022-12-01T11:41:28.624Z"
-        } 
+            "balanceAfterTransaction": 16000,
+            "_id": "638b131dca4c031f61b77038",
+            "createdAt": "2022-12-03T09:13:01.851Z",
+            "updatedAt": "2022-12-03T09:13:01.851Z"
+        }
     }
   
  ```
@@ -153,22 +146,20 @@
  #### Example transaction in response
  ---------------------------------------------------------------
  ``` js
- {          "_id": "63887bb97266b9ea7458a41b",
-            "date": "2022-12-01T10:01:59.741Z",
+ {                 
+            "_id": "638b11be5c6e2eeb2d95e915",
+            "date": "2022-12-02T19:07:08.114Z",
             "month": 12,
-            "year":2022,
+            "year": 2022,
             "type": "income",
-            "category": "other",
-            "owner": {
-                "_id": "6387c675942ce7fe9c94c962",
-                "name": "Test",
-                "email": "test@mail.com"
-            },
+            "category": "regular",
+            "owner": "638b11225c6e2eeb2d95e90e",
             "comment": "",
-            "sum": 25000,
-            "balanceAfterTransaction": 39800,
-            "createdAt": "2022-12-01T10:02:33.205Z",
-            "updatedAt": "2022-12-01T10:02:33.205Z"
+            "sum": 10000,
+            "balanceAfterTransaction": 10000,
+            "createdAt": "2022-12-03T09:07:10.333Z",
+            "updatedAt": "2022-12-03T09:07:10.333Z"
+        
         },
         
 ```
@@ -199,4 +190,103 @@
 }
 
 ```
+----------------------------------------
+### CATEGORIES
+Base category
 
+    [
+    {
+        "_id": "1",
+        "type": "expense",
+        "categoryName": "other"
+    },
+    {
+        "_id": "2",
+        "type": "expense",
+        "categoryName": "food"
+    },
+    {
+        "_id": "3",
+        "type": "expense",
+        "categoryName": "car"
+    },
+    {
+        "_id": "4",
+        "type": "expense",
+        "categoryName": "fun"
+    },
+    {
+        "_id": "5",
+        "type": "expense",
+        "categoryName": "ЗСУ"
+    },
+    {
+        "_id": "6",
+        "type": "income",
+        "categoryName": "regular"
+    },
+    {
+        "_id": "7",
+        "type": "income",
+        "categoryName": "irregular"
+    }
+   
+]
+------------------------
+#### ADD
+`/api/categories`
+* method:POST
+* body:
+``` js
+{
+    	"type": "income",`("expense"||"income")`*
+    	"categoryName": "newCategoryName"*
+}
+```
+* response:
+``` js  
+   "category": {
+        "type": "income",
+        "categoryName": "newCategoryName",
+        "owner": "638b11225c6e2eeb2d95e90e",
+        "_id": "638b14be1a24bc4dfbf82b2e"
+    }
+```
+
+---------------------------------------
+#### DELETE
+`/api/categories/:categoryId`
+* method:DELETE
+* response:
+``` js
+{
+    "message": "category deleted"
+}
+```
+------------------------------------------
+
+#### GET ALL
+* method:GET
+* response:
+``` js
+{
+    "data": {
+        "baseCategories": [
+            {
+                "_id": "1",
+                "type": "expense",
+                "categoryName": "other"
+            },
+        ],
+        "userCategory": [
+            {
+                "_id": "638b14611a24bc4dfbf82b1a",
+                "type": "expense",
+                "categoryName": "cat",
+                "owner": "638b11225c6e2eeb2d95e90e"
+            }
+        ]
+    }
+}
+
+```
