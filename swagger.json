@@ -2,7 +2,7 @@
   "openapi": "3.0.1",
   "info": {
     "version": "2.0.2",
-    "title": "Swagger test",
+    "title": "Swagger Wallet",
     "description": "Showing off swagger-ui-express",
     "license": {
       "name": "MIT",
@@ -12,19 +12,26 @@
   "consumes": ["application/json"],
   "produces": ["application/json"],
   "servers": [{ "url": "https://app-wallet.onrender.com" }],
-  "tags": [
+ "tags": [
     {
       "name": "Auth",
       "description": "Authorization endpoints"
+    },
+    {
+      "name": "Users",
+      "description": "Users endpoints"
+    },
+    {
+      "name": "Transactions",
+      "description": "Transactions endpoints"
     }
   ],
   "paths": {
-    "/auth/register": {
+    "/api/auth/register": {
       "post": {
         "tags": ["Auth"],
         "summary": "User registration",
         "parameters": [],
-        "security": [{ "Bearer": [] }],
         "requestBody": {
           "description": "Registration's object",
           "required": true,
@@ -57,13 +64,332 @@
           }
         }
       }
+    },
+    "/api/auth/login": {
+      "post": {
+        "tags": ["Auth"],
+        "summary": "User login",
+        "parameters": [],
+        "requestBody": {
+          "description": "Login's object",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/LoginRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LoginResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Email or password is wrong",
+            "content": {}
+          }
+        }
+      }
+    },
+    "/api/auth/logout": {
+      "post": {
+        "tags": ["Auth"],
+        "summary": "User logout",
+        "parameters": [],
+        "security": [{ "Bearer": [] }],
+        
+        "responses": {
+          "204": {
+            "description": "Successful operation",
+            "content": {}
+          },
+          "401": {
+            "description": "Not authorized (invalid token)",
+            "content": {}
+          }
+        }
+      }
+    },
+    "/api/auth/refresh": {
+      "post": {
+        "tags": ["Auth"],
+        "summary": "User token refresh",
+        "parameters": [],
+        "security": [{ "Bearer": [] }],
+        "requestBody": {
+          "description": "Refresh token",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RefreshTokenRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RefreshTokenResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Token expired",
+            "content": {}
+          }
+        }
+      }
+    },
+    "/api/user/current": {
+      "get": {
+        "tags": ["Users"],
+        "summary": "Get current user's information by access token",
+        "parameters": [],
+        "security": [{ "Bearer": [] }],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CurrentUserResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Token expired",
+            "content": {}
+          }
+        }
+      }
+    },
+    "/api/transactions": {
+      "post": {
+        "tags": ["Transactions"],
+        "summary": "Create new transaction",
+        "parameters": [],
+        "security": [{ "Bearer": [] }],
+        "requestBody": {
+          "description": "Transaction's object",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AddTransactionRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AddTransactionResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request (invalid request body)",
+            "content": {}
+          },
+          "401": {
+            "description": "Not authorized (invalid token)",
+            "content": {}
+          }
+        }
+      },
+      "get": {
+        "tags": ["Transactions"],
+        "summary": "Get transactions by user",
+        "parameters": [],
+        "security": [{ "Bearer": [] }],
+        
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {"application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetTransactionResponse"
+                }
+              }}
+          },
+          "400": {
+            "description": "Bad request (invalid request body)",
+            "content": {}
+          },
+          "401": {
+            "description": "Not authorized (invalid token)",
+            "content": {}
+          }
+        }
+      }
+    },
+    "/api/transactions/statistic": {
+      "get": {
+        "tags": ["Transactions"],
+        "summary": "Get statistic by user transactions",
+        "parameters": [],
+        "security": [{ "Bearer": [] }],
+        
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StatisticTransactionResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request (invalid request body)",
+            "content": {}
+          },
+          "401": {
+            "description": "Not authorized (invalid token)",
+            "content": {}
+          }
+        }
+      }
     }
   },
+  
   "components": {
     "schemas": {
+       "GetTransactionResponse":{
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "date": {
+            "type": "string",
+            "description": "Transaction date",
+            "format": "date-time"
+          },
+          "month": {
+            "type": "integer",
+            "description": "Transaction date",
+            "example": "3"
+          },
+          "year": {
+            "type": "integer",
+            "description": "Transaction date",
+            "example": "2022"
+          },
+            "type": {
+              "type": "string",
+              "description": "Transaction type",
+              "example": "expense"
+            },
+            "category": {
+              "type": "string",
+              "description": "Transaction category",
+              "example": "food"
+            },
+            "owner": {
+              "type": "string",
+              "description": "Transaction owner",
+              "example": "6387c675942ce7fe9c94c962"
+            },
+            "comment": {
+              "type": "string",
+              "description": "Comment",
+              "example": "Bread"
+            },
+            "sum": {
+              "type": "integer",
+              "description": "Transaction sum",
+              "example": 80
+            },
+            "balanceAfterTransaction": {
+              "type": "integer",
+              "description": "Balance after transaction",
+              "example": 8080
+            },
+            "_id": {
+              "type": "string",
+              "description": "Transaction id",
+              "example": "638892e838e3a5b290db2ed4"
+            },
+            "createdAt": {
+              "type": "string",
+              "description": "Date of create transaction",
+              "format": "date-time"
+            },
+            "updatedAt": {
+              "type": "string",
+              "description": "Date of update transaction",
+              "format": "date-time"
+            }
+          }
+        },
+        "example": [
+          { "date": "2022-03-01T12:25:00.000Z", "month": 3, "year": 2022,"type": "income","category": "food","owner": "6389c2f995a025e648ebdb93","comment": "text comment", "sum": 1000,"balanceAfterTransaction": 2000,"_id": "638b8cd7692723ab783ddda0","createdAt": "2022-12-03T17:52:23.138Z","updatedAt": "2022-12-03T17:52:23.138Z" }, { "date": "2022-02-01T12:25:00.000Z", "month": 3, "year": 2022,"type": "income","category": "car","owner": "6389c2f995a025e648ebdb93","comment": "text comment", "sum": 5000,"balanceAfterTransaction": 3000,"_id": "638b8cd7692723ab783ddda0","createdAt": "2022-11-03T17:52:23.138Z","updatedAt": "2022-12-03T17:52:23.138Z" }
+        ]
+       },
+    "StatisticTransactionResponse":{
+      "type": "array",
+      "example":[{
+    "allCategories": [
+        {
+            "categoryName": "categoryName",
+            "totalSum": 10000
+        }
+    ],
+    "typesTotalSum": [
+        {
+            "typeName": "expense",
+            "totalSum": 20000
+        },
+        {
+            "typeName": "income",
+            "totalSum": 30000
+        }
+    ]
+}]
+    },
       "RegistrationRequest": {
         "type": "object",
-        "required": ["email", "password"],
+        "required": ["name","email", "password"],
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "User's name",
+            "example": "User"
+          },
+          "email": {
+            "type": "string",
+            "description": "User's email",
+            "format": "email"
+          },
+          "password": {
+            "type": "string",
+            "description": "User's password",
+            "example": "qwerty123"
+          }
+        }
+      },
+      "LoginRequest": {
+        "type": "object",
+        "required": ["name","email", "password"],
         "properties": {
           "email": {
             "type": "string",
@@ -77,29 +403,225 @@
           }
         }
       },
+      "AddTransactionRequest": {
+        "type": "object",
+        "required": ["date","type", "category","comment","sum"],
+        "properties": {
+          "date": {
+            "type": "string",
+            "description": "Transaction date",
+            "format": "date-time"
+          },
+           "type": {
+            "type": "string",
+            "description": "Transaction type",
+            "example": "expense"
+          },
+           "category": {
+            "type": "string",
+            "description": "Transaction category",
+            "example": "ЗСУ"
+          },
+           "comment": {
+            "type": "string",
+            "description": "Transaction comment",
+            "example": "Bayractar"
+          },
+          "sum": {
+            "type": "integer",
+            "description": "Transaction sum",
+            "example": "8000"
+          }
+        }
+      },
+      "RefreshTokenRequest": {
+        "type": "object",
+        "required": ["name","email", "password"],
+        "properties": {
+           "refreshToken": {
+            "type": "string",
+            "description": "User's accessToken",
+            "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzODljMmY5OTVhMDI1ZTY0OGViZGI5MyIsImlhdCI6MTY2OTk3Mjk4NiwiZXhwIjoxNjcwNTc3Nzg2fQ.HCHOV56BdZthjeoahwSWN8ViB_6Viq04gW7zJ4K5Zng"
+          }
+        }
+      },
       "RegistrationResponse": {
         "type": "array",
         "items": {
           "type": "object",
           "properties": {
+            "name": {
+            "type": "string",
+            "description": "User's name",
+            "example": "User"
+          },
+            "email": {
+              "type": "string",
+              "description": "User's email",
+              "format": "email"
+            }
+          }
+        },
+        "example": [
+          { "name": "Dan", "email": "1@gmail.com" },
+          { "name": "Ban", "email": "2@gmail.com" }
+        ]
+      },
+      "LoginResponse": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            
             "email": {
               "type": "string",
               "description": "User's email",
               "format": "email"
             },
-            "userId": {
-              "type": "number",
-              "description": "User's id",
-              "example": "32143232436545474"
+            "accessToken": {
+            "type": "string",
+            "description": "User's accessToken",
+            "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzODljMmY5OTVhMDI1ZTY0OGViZGI5MyIsImlhdCI6MTY2OTk3Mjk4NiwiZXhwIjoxNjY5OTczODg2fQ.CJBe4RYEIXeFhh2z_ndX2-pjj5a3qXsE5EbUW6lUFLw"
+          },
+          "refreshToken": {
+            "type": "string",
+            "description": "User's accessToken",
+            "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzODljMmY5OTVhMDI1ZTY0OGViZGI5MyIsImlhdCI6MTY2OTk3Mjk4NiwiZXhwIjoxNjcwNTc3Nzg2fQ.HCHOV56BdZthjeoahwSWN8ViB_6Viq04gW7zJ4K5Zng"
+          }
+          }
+        },
+        "example": [
+          {"email": "1@gmail.com", "accessToken":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzODljMmY5OTVhMDI1ZTY0OGViZGI5MyIsImlhdCI6MTY2OTk3Mjk4NiwiZXhwIjoxNjY5OTczODg2fQ.CJBe4RYEIXeFhh2z_ndX2-pjj5a3qXsE5EbUW6lUFrr", "refreshToken":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzODljMmY5OTVhMDI1ZTY0OGViZGI5MyIsImlhdCI6MTY2OTk3Mjk4NiwiZXhwIjoxNjY5OTczODg2fQ.CJBe4RYEIXeFhh2z_ndX2-pjj5a3qXsE5EbUW6lUFqq"},
+          {"email": "2@gmail.com", "accessToken":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzODljMmY5OTVhMDI1ZTY0OGViZGI5MyIsImlhdCI6MTY2OTk3Mjk4NiwiZXhwIjoxNjY5OTczODg2fQ.CJBe4RYEIXeFhh2z_ndX2-pjj5a3qXsE5EbUW6lUFff", "refreshToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzODljMmY5OTVhMDI1ZTY0OGViZGI5MyIsImlhdCI6MTY2OTk3Mjk4NiwiZXhwIjoxNjY5OTczODg2fQ.CJBe4RYEIXeFhh2z_ndX2-pjj5a3qXsE5EbUW6lUFzz" }
+        ]
+      },
+      "RefreshTokenResponse": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "accessToken": {
+            "type": "string",
+            "description": "User's accessToken",
+            "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzODljMmY5OTVhMDI1ZTY0OGViZGI5MyIsImlhdCI6MTY2OTk3Mjk4NiwiZXhwIjoxNjY5OTczODg2fQ.CJBe4RYEIXeFhh2z_ndX2-pjj5a3qXsE5EbUW6lUFLw"
+          },
+          "refreshToken": {
+            "type": "string",
+            "description": "User's accessToken",
+            "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzODljMmY5OTVhMDI1ZTY0OGViZGI5MyIsImlhdCI6MTY2OTk3Mjk4NiwiZXhwIjoxNjcwNTc3Nzg2fQ.HCHOV56BdZthjeoahwSWN8ViB_6Viq04gW7zJ4K5Zng"
+          }
+          }
+        },
+        "example": [
+          {"accessToken":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzODljMmY5OTVhMDI1ZTY0OGViZGI5MyIsImlhdCI6MTY2OTk3Mjk4NiwiZXhwIjoxNjY5OTczODg2fQ.CJBe4RYEIXeFhh2z_ndX2-pjj5a3qXsE5EbUW6lUFrr", "refreshToken":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzODljMmY5OTVhMDI1ZTY0OGViZGI5MyIsImlhdCI6MTY2OTk3Mjk4NiwiZXhwIjoxNjY5OTczODg2fQ.CJBe4RYEIXeFhh2z_ndX2-pjj5a3qXsE5EbUW6lUFqq"},
+          {"accessToken":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzODljMmY5OTVhMDI1ZTY0OGViZGI5MyIsImlhdCI6MTY2OTk3Mjk4NiwiZXhwIjoxNjY5OTczODg2fQ.CJBe4RYEIXeFhh2z_ndX2-pjj5a3qXsE5EbUW6lUFff", "refreshToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzODljMmY5OTVhMDI1ZTY0OGViZGI5MyIsImlhdCI6MTY2OTk3Mjk4NiwiZXhwIjoxNjY5OTczODg2fQ.CJBe4RYEIXeFhh2z_ndX2-pjj5a3qXsE5EbUW6lUFzz" }
+        ]
+      },
+      "CurrentUserResponse": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "User's name",
+            "example": "UserName"
+          },
+          "email": {
+            "type": "string",
+            "description": "User's email",
+            "format": "email"
+          },
+          "userBalance": {
+            "type": "integer",
+            "description": "User's balance",
+            "example": "1234"
+          },
+          "userCategory": {
+            "type": "array",
+            "items": {"type":"object"},
+            "description": "User's category",
+            "example": [{"Income":"Salary"}]
+          },
+          "userTransaction": {
+            "type": "array",
+            "items": {"type":"object"},
+            "description": "User's transaction",
+            "example": [{"gift":1500},{"Food":1000}]
+          }
+        }
+      },
+      "AddTransactionResponse": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "date": {
+            "type": "string",
+            "description": "Transaction date",
+            "format": "date-time"
+          },
+          "month": {
+            "type": "integer",
+            "description": "Transaction date",
+            "example": "3"
+          },
+          "year": {
+            "type": "integer",
+            "description": "Transaction date",
+            "example": "2022"
+          },
+            "type": {
+              "type": "string",
+              "description": "Transaction type",
+              "example": "expense"
+            },
+            "category": {
+              "type": "string",
+              "description": "Transaction category",
+              "example": "food"
+            },
+            "owner": {
+              "type": "string",
+              "description": "Transaction owner",
+              "example": "6387c675942ce7fe9c94c962"
+            },
+            "comment": {
+              "type": "string",
+              "description": "Comment",
+              "example": "Bread"
+            },
+            "sum": {
+              "type": "integer",
+              "description": "Transaction sum",
+              "example": 80
+            },
+            "balanceAfterTransaction": {
+              "type": "integer",
+              "description": "Balance after transaction",
+              "example": 8080
+            },
+            "_id": {
+              "type": "string",
+              "description": "Transaction id",
+              "example": "638892e838e3a5b290db2ed4"
+            },
+            "createdAt": {
+              "type": "string",
+              "description": "Date of create transaction",
+              "format": "date-time"
+            },
+            "updatedAt": {
+              "type": "string",
+              "description": "Date of update transaction",
+              "format": "date-time"
             }
           }
         },
         "example": [
-          { "email": "1@gmail.com", "userId": "1" },
-          { "email": "2@gmail.com", "userId": "2" }
+          { "date": "2022-03-01T12:25:00.000Z", "month": 3, "year": 2022,"type": "income","category": "food","owner": "6389c2f995a025e648ebdb93","comment": "text comment", "sum": 1000,"balanceAfterTransaction": 2000,"_id": "638b8cd7692723ab783ddda0","createdAt": "2022-12-03T17:52:23.138Z","updatedAt": "2022-12-03T17:52:23.138Z" }
         ]
       }
     },
+   
     "securitySchemes": {
       "Bearer": {
         "type": "http",
