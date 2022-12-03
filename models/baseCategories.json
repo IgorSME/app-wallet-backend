@@ -1,0 +1,33 @@
+[
+    {
+        "id": "1",
+        "type": "expense",
+        "categoryName": "food"
+    },
+    {
+        "id": "2",
+        "type": "expense",
+        "categoryName": "food"
+    },
+    {
+        "id": "3",
+        "type": "expense",
+        "categoryName": "car"
+    },
+    {
+        "id": "4",
+        "type": "expense",
+        "categoryName": "fun"
+    },
+    {
+        "id": "5",
+        "type": "income",
+        "categoryName": "regular"
+    },
+    {
+        "id": "6",
+        "type": "income",
+        "categoryName": "irregular"
+    }
+   
+]

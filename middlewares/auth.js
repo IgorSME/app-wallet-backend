@@ -1,6 +1,6 @@
 const jwt = require("jsonwebtoken");
 const { User } = require("./../models");
-const {requestError}=require ("../helpers")
+const { requestError } = require("../helpers");
 const { SECRET_KEY_ACCESS } = process.env;
 
 const auth = async (req, res, next) => {
@@ -12,7 +12,9 @@ const auth = async (req, res, next) => {
       throw requestError(401, "Not authorized");
     }
     const { id } = jwt.verify(token, SECRET_KEY_ACCESS);
-    const user = await User.findById(id);
+    const user = await User.findById(id).populate(
+      "userTransaction userCategory"
+    );
     if (!user) {
       throw requestError(401, "Not authorized");
     }
@@ -31,13 +33,10 @@ const auth = async (req, res, next) => {
     // accessToken expired
     if (error.message === "jwt expired") {
       error.status = 412;
-      error.message="OOOPS"
-    
-
+      error.message = "OOOPS";
     }
     next(error);
   }
-  
 };
 
 module.exports = auth;

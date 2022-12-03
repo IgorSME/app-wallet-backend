@@ -12,21 +12,11 @@ const transactionSchema = new Schema(
     type: {
       type: String,
       enum: ["income", "expense"],
-      default: "income",
+      required: true,
     },
     category: {
       type: String,
-      enum: [
-        "food",
-        "car",
-        "other",
-        "cats",
-        "educations",
-        "ЗСУ",
-        "fun",
-        "travel",
-      ],
-      default: "other",
+      required: true,
     },
     owner: {
       type: Schema.Types.ObjectId,
@@ -49,9 +39,9 @@ const transactionSchema = new Schema(
 );
 
 const joiTransactionSchema = Joi.object({
-  date: Joi.date().timestamp("unix"),
-  type: Joi.string(),
-  category: Joi.string(),
+  date: Joi.date().timestamp("unix").required(),
+  type: Joi.string().required(),
+  category: Joi.string().required(),
   comment: Joi.string(),
   sum: Joi.number(),
   balanceAfterTransaction: Joi.number(),
