@@ -43,7 +43,7 @@ const joiTransactionSchema = Joi.object({
   type: Joi.string().required(),
   category: Joi.string().required(),
   comment: Joi.string(),
-  sum: Joi.number(),
+  sum: Joi.number().positive(),
   balanceAfterTransaction: Joi.number(),
 });
 
