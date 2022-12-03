@@ -8,7 +8,7 @@ const getAll = async (req, res) => {
   const transactions = await Transaction.find({ owner: _id }, "", {
     skip,
     limit,
-  });
+  }).sort({date:-1});
   
   res.json({
     transactions,

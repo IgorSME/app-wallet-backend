@@ -46,11 +46,12 @@
 ```
 
 * response :
-``` js data: {
-      email:"user@gmail.com",
-      accessToken:"accessToken**********************************************",
-      refreshToken,:"refreshToken*******************************************"
-    },
+``` js 
+        data: {
+            email:"user@gmail.com",
+            accessToken:"accessToken**********************************************",
+            refreshToken,:"refreshToken*******************************************"
+            },
    
 ```
 ----------------------------------------------
@@ -139,7 +140,7 @@
 
 #### GETAll
 
-`/api/transactions`
+`/api/transactions`||`/api/transactions?page=<номер сторінки>&limit=<кількість на сторінці >`
 * method:GET
 * response :"transactions": []
 
