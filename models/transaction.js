@@ -12,11 +12,11 @@ const transactionSchema = new Schema(
     type: {
       type: String,
       enum: ["income", "expense"],
-      required: true,
+      required: [true, "Set type "],
     },
     category: {
       type: String,
-      required: true,
+      required: [true, "Set category "],
     },
     owner: {
       type: Schema.Types.ObjectId,
@@ -29,7 +29,7 @@ const transactionSchema = new Schema(
     },
     sum: {
       type: Number,
-      require: true,
+      require: [true, "Set sum "],
     },
     balanceAfterTransaction: {
       type: Number,

@@ -8,7 +8,7 @@ const categorySchema = new Schema(
     type: {
       type: String,
       enum: ["income", "expense"],
-      default: "expense",
+      required: [true, "Set type "],
     },
     categoryName: {
       type: String,

@@ -1,31 +1,36 @@
 [
     {
-        "id": "1",
+        "_id": "1",
+        "type": "expense",
+        "categoryName": "other"
+    },
+    {
+        "_id": "2",
         "type": "expense",
         "categoryName": "food"
     },
     {
-        "id": "2",
-        "type": "expense",
-        "categoryName": "food"
-    },
-    {
-        "id": "3",
+        "_id": "3",
         "type": "expense",
         "categoryName": "car"
     },
     {
-        "id": "4",
+        "_id": "4",
         "type": "expense",
         "categoryName": "fun"
     },
     {
-        "id": "5",
+        "_id": "5",
+        "type": "expense",
+        "categoryName": ""
+    },
+    {
+        "_id": "6",
         "type": "income",
         "categoryName": "regular"
     },
     {
-        "id": "6",
+        "_id": "7",
         "type": "income",
         "categoryName": "irregular"
     }
