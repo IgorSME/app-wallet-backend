@@ -664,7 +664,7 @@
           "date": {
             "type": "string",
             "description": "Transaction date",
-            "format": "date-time"
+            "example": "1646137500000"
           },
            "type": {
             "type": "string",
