@@ -8,7 +8,7 @@ const add = async (req, res) => {
   const year = new Date(date).getFullYear();
   const month = new Date(date).getMonth() + 1;
 
-  const fixedSum = sum.toFixed(2);
+  const fixedSum = sum?.toFixed(2);
   const newBalance =
     type === "income" ? userBalance + fixedSum : userBalance - fixedSum;
 
@@ -20,7 +20,7 @@ const add = async (req, res) => {
     ...req.body,
     sum: fixedSum,
     owner: _id,
-    balanceAfterTransaction: newBalance.toFixed(2),
+    balanceAfterTransaction: newBalance?.toFixed(2),
     month,
     year,
   });
