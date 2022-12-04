@@ -337,6 +337,72 @@
           }
         }
       }
+    },
+    "/api/categories": {
+      "get": {
+        "tags": ["Categories"],
+        "summary": "Get all categories",
+        "parameters": [],
+        "security": [{ "Bearer": [] }],
+        
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetCategoriesResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "content": {}
+          },
+          "401": {
+            "description": "Not authorized (invalid token)",
+            "content": {}
+          }
+        }
+      },
+      "post": {
+        "tags": ["Categories"],
+        "summary": "Add new category",
+        "parameters": [],
+        "security": [{ "Bearer": [] }],
+        "requestBody": {
+          "description": "Category object",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AddCategoryRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AddCategoryResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request ",
+            "content": {}
+          },
+          "401": {
+            "description": "Not authorized (invalid token)",
+            "content": {}
+          }
+        }
+      }
     }
   },
   
@@ -447,6 +513,72 @@
     "comment": "NewComment"
 }]
     },
+    "GetCategoriesResponse":{
+      "type": "array",
+      "example":[{
+    "baseCategories": [{
+                "_id": "1",
+                "type": "expense",
+                "categoryName": "other"
+            }],
+    "userCategory": [{
+                "_id": "638b14611a24bc4dfbf82b1a",
+                "type": "expense",
+                "categoryName": "cat",
+                "owner": "638b11225c6e2eeb2d95e90e"
+            }]
+}]
+    },
+    "AddCategoryResponse":{
+      "type": "object",
+      "items": {
+          "type": "object",
+          "properties": {
+            "type": {
+            "type": "string",
+            "description": "Type of categories",
+            "example": "income"
+          },
+            "categoryName": {
+              "type": "string",
+              "description": "Name of new category",
+            "example": "newCategoryName"
+            },
+            "owner": {
+              "type": "string",
+              "description": "Owner's id",
+              "example": "638b11225c6e2eeb2d95e90e"
+            },
+            "_id": {
+              "type": "string",
+              "description": "User's email",
+              "example": "638b14be1a24bc4dfbf82b2e"
+            }
+          }
+        },
+      "example":[{
+        "type": "income",
+        "categoryName": "newCategoryName",
+        "owner": "638b11225c6e2eeb2d95e90e",
+        "_id": "638b14be1a24bc4dfbf82b2e"
+    }]
+    },
+    "AddCategoryRequest": {
+        "type": "object",
+        "required": ["type","categoryName"],
+        "properties": {
+          "type": {
+            "type": "string",
+            "description": "Type of categories",
+            "example": "income"
+          },
+          "categoryName": {
+            "type": "string",
+            "description": "Name of new category",
+            "example": "newCategoryName"
+          }
+        }
+      },
       "RegistrationRequest": {
         "type": "object",
         "required": ["name","email", "password"],
