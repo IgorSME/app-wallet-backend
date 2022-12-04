@@ -5,7 +5,11 @@ const { User } = require("../../models");
 const login = async (req, res) => {
   const { email, password } = req.body;
   const user = await User.findOne({ email });
-  if (!user || !bcrypt.compare(password, user.password)) {
+  if (!user) {
+    throw requestError(401, `Email or password is wrong"`);
+  }
+   const passwordCompare = await bcrypt.compare(password, user.password)
+  if (!passwordCompare) {
     throw requestError(401, `Email or password is wrong"`);
   }
 
@@ -14,6 +18,7 @@ const login = async (req, res) => {
 
   res.status(200).json({
     data: {
+      name:user.name,
       email: user.email,
       accessToken,
       refreshToken,

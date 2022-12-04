@@ -20,7 +20,7 @@ const add = async (req, res) => {
     ...req.body,
     sum: fixedSum,
     owner: _id,
-    balanceAfterTransaction: newBalance,
+    balanceAfterTransaction: newBalance.toFixed(2),
     month,
     year,
   });
