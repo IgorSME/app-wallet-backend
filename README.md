@@ -46,9 +46,10 @@
 * response :
 ``` js 
         data: {
+            name: "userName",
             email:"user@gmail.com",
             accessToken:"accessToken**********************************************",
-            refreshToken,:"refreshToken*******************************************"
+            refreshToken:"refreshToken*******************************************"
             },
    
 ```
