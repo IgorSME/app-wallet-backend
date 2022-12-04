@@ -10,20 +10,20 @@ const deleteById = async (req, res) => {
     owner: _id,
   });
 
+  if (!transaction) {
+    throw requestError(404, `transaction with id=${idParam} not found`);
+  }
+
   const newBalance =
-    transaction.type === "income"
-      ? userBalance - transaction.sum
-      : userBalance + transaction.sum;
-  
+    transaction?.type === "income"
+      ? (userBalance - transaction.sum).toFixed(2)
+      : (userBalance + transaction.sum).toFixed(2);
+
   await User.findOneAndUpdate(
     { _id },
     { $pull: { userTransaction: transaction._id }, userBalance: newBalance }
   );
 
-  if (!transaction) {
-    throw requestError(404, `transaction with id=${idParam} not found`);
-  }
-  
   res.json({
     message: "transaction deleted",
     newBalance,
