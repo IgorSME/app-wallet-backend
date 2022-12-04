@@ -5,7 +5,11 @@ const {
   joiRefreshTokenSchema,
 } = require("./user");
 
-const { Transaction, joiTransactionSchema } = require("./transaction");
+const {
+  Transaction,
+  joiTransactionSchema,
+  joiUpdateCommentSchema,
+} = require("./transaction");
 
 
 module.exports = {
@@ -15,4 +19,5 @@ module.exports = {
   joiRefreshTokenSchema,
   Transaction,
   joiTransactionSchema,
+  joiUpdateCommentSchema,
 };

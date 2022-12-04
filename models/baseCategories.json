@@ -2,35 +2,65 @@
     {
         "_id": "1",
         "type": "expense",
-        "categoryName": "other"
+        "categoryName":"Main expenses"
     },
     {
         "_id": "2",
         "type": "expense",
-        "categoryName": "food"
+        "categoryName": "Products"
     },
     {
         "_id": "3",
         "type": "expense",
-        "categoryName": "car"
+        "categoryName": "Car"
     },
     {
         "_id": "4",
         "type": "expense",
-        "categoryName": "fun"
+        "categoryName": "Self care"
     },
     {
         "_id": "5",
         "type": "expense",
         "categoryName": "ЗСУ"
     },
+        {
+            "_id": "6",
+            "type": "expense",
+            "categoryName": "Education"
+        },
+        {
+            "_id": "7",
+            "type": "expense",
+            "categoryName": "Entertainment"
+        },
+        {
+            "_id": "8",
+            "type": "expense",
+            "categoryName": "Other expenses"
+        },
+        {
+            "_id": "9",
+            "type": "expense",
+            "categoryName": "Leisure"
+        },
+        {
+            "_id": "10",
+            "type": "expense",
+            "categoryName": "Household products"
+        },
+        {
+            "_id": "11",
+            "type": "expense",
+            "categoryName": "Child care"
+        },
     {
-        "_id": "6",
+        "_id": "12",
         "type": "income",
         "categoryName": "regular"
     },
     {
-        "_id": "7",
+        "_id": "13",
         "type": "income",
         "categoryName": "irregular"
     }

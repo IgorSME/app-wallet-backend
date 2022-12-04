@@ -1,9 +1,7 @@
 # app-wallet-backend
 
 `BASE_URL:"https://app-wallet.onrender.com"`
-
-
-## ENDPOINTS
+-----------------------------------------------------------------------
 ### AUTH
 ----------------------------------------------------------------------
 `Authorization header: Bearer token(accessToken)`
@@ -13,10 +11,10 @@
 - це означає що accessToken вже не валідний 
 Саме час скористатися роутом `/api/auth/refresh`
 ---------------------------------------------------------------------
-
-
 #### register
+--------------------------------------------------------------------
 `/api/auth/register`
+-----------------------------------------------------------
 * method:POST
 * body: 
     ``` js
@@ -32,10 +30,10 @@
       email:"user@gmail.com",*
     },
 -------------------------------------  
-
-
 #### login
+--------------------------------------------------------
 `/api/auth/login`
+-------------------------------------------------------
 * method:POST
 * body:
 ``` js 
@@ -55,20 +53,24 @@
    
 ```
 ----------------------------------------------
-
 #### logout
+---------------------------------------------------
 `/api/auth/logout`
+--------------------------------------------------
 * method:POST
 * response : status(204)
 ---------------------------------------------------
-
 #### refresh
+----------------------------------------------------
 `/api/auth/refresh`
+---------------------------------------------------------
 * method:POST
 * body:
 ``` js 
 
-{refreshToken:"refreshToken*******************************************"*}
+{
+    refreshToken:"refreshToken*******************************************"*
+    }
 
 ```
 * response : 
@@ -81,10 +83,12 @@
       
 ```
 ----------------------------------
-
 ### USER
-
+-------------------------------------------------------
+#### current User
+----------------------------------------------------------
 `/api/user/current`
+-------------------------------------------------
 * method:GET
 * response : 
 ``` js 
@@ -97,11 +101,12 @@
             },
 ```
 ----------------------------
-
 ### TRANSACTIONS
 -----------------------------------------------------
 #### ADD
+---------------------------------------------------
 `/api/transactions`
+------------------------------------------------
 * method:POST
 * body:
 ``` js 
@@ -136,11 +141,27 @@
   
  ```
     
-----------------------
+---------------------------------------
+#### DELETE
+----------------------------------------
+`/api/transactions/:transactionId`
+-------------------------------------------
+* method:DELETE
+* response:
+``` js
+{
+    "message": "transaction deleted",
+    userBalance:newUserBalance
+}
+```
+------------------------------------------
 
 #### GETAll
-
-`/api/transactions`||`/api/transactions?page=<номер сторінки>&limit=<кількість на сторінці >`
+------------------------------------------------
+`/api/transactions`
+--------------------------
+`/api/transactions?page=<номер сторінки>&limit=<кількість на сторінці >`
+----------------------------------------------------
 * method:GET
 * response :"transactions": []
 
@@ -166,7 +187,11 @@
 ```
 ---------------------------------------------------------------
 #### STATISTIC
-`/api/transactions/statistic`||`/api/transactions/statistic?year=<year>&month=<month>`
+----------------------------------------------
+`/api/transactions/statistic`
+---------------------------------------------------
+`/api/transactions/statistic?year=<year>&month=<month>`
+-------------------------------------------------
 * method:GET
 * query param : якщо місяць та рік не задані генерується поточна дата
 * response :
@@ -199,43 +224,76 @@ Base category
     {
         "_id": "1",
         "type": "expense",
-        "categoryName": "other"
+        "categoryName":"Main expenses"
     },
     {
         "_id": "2",
         "type": "expense",
-        "categoryName": "food"
+        "categoryName": "Products"
     },
     {
         "_id": "3",
         "type": "expense",
-        "categoryName": "car"
+        "categoryName": "Car"
     },
     {
         "_id": "4",
         "type": "expense",
-        "categoryName": "fun"
+        "categoryName": "Self care"
     },
     {
         "_id": "5",
         "type": "expense",
         "categoryName": "ЗСУ"
     },
+        {
+            "_id": "6",
+            "type": "expense",
+            "categoryName": "Education"
+        },
+        {
+            "_id": "7",
+            "type": "expense",
+            "categoryName": "Entertainment"
+        },
+        {
+            "_id": "8",
+            "type": "expense",
+            "categoryName": "Other expenses"
+        },
+        {
+            "_id": "9",
+            "type": "expense",
+            "categoryName": "Leisure"
+        },
+        {
+            "_id": "10",
+            "type": "expense",
+            "categoryName": "Household products"
+        },
+        {
+            "_id": "11",
+            "type": "expense",
+            "categoryName": "Child care"
+        },
     {
-        "_id": "6",
+        "_id": "12",
         "type": "income",
         "categoryName": "regular"
     },
     {
-        "_id": "7",
+        "_id": "13",
         "type": "income",
         "categoryName": "irregular"
     }
    
 ]
+
 ------------------------
 #### ADD
+-------------------------------------
 `/api/categories`
+--------------------------------------
 * method:POST
 * body:
 ``` js
@@ -256,7 +314,9 @@ Base category
 
 ---------------------------------------
 #### DELETE
+-----------------------------------------
 `/api/categories/:categoryId`
+------------------------------------------
 * method:DELETE
 * response:
 ``` js
@@ -267,11 +327,13 @@ Base category
 ------------------------------------------
 
 #### GET ALL
+----------------------------------------------------
+`/api/categories`
+-----------------------------------------------------
 * method:GET
 * response:
 ``` js
 {
-    "data": {
         "baseCategories": [
             {
                 "_id": "1",
@@ -287,7 +349,7 @@ Base category
                 "owner": "638b11225c6e2eeb2d95e90e"
             }
         ]
-    }
+
 }
 
 ```

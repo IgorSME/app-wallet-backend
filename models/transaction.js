@@ -47,9 +47,14 @@ const joiTransactionSchema = Joi.object({
   balanceAfterTransaction: Joi.number(),
 });
 
+const joiUpdateCommentSchema = Joi.object({
+  comment:Joi.string().required()
+})
+
 const Transaction = model("transaction", transactionSchema);
 
 module.exports = {
   Transaction,
   joiTransactionSchema,
+  joiUpdateCommentSchema,
 };

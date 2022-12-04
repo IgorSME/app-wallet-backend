@@ -15,12 +15,15 @@ const auth = async (req, res, next) => {
     const user = await User.findById(id).populate(
       "userTransaction userCategory"
     );
+
     if (!user) {
       throw requestError(401, "Not authorized");
     }
+
     if (!user.accessToken) {
       throw requestError(401, "Token expired");
     }
+    
     req.user = user;
     next();
   } catch (error) {
