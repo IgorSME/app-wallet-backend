@@ -1,5 +1,5 @@
 const { User, Transaction } = require("../../models");
-const {requestError} =require("../../helpers")
+const { requestError } = require("../../helpers");
 
 const add = async (req, res) => {
   const { type, sum, date } = req.body;
@@ -8,14 +8,17 @@ const add = async (req, res) => {
   const year = new Date(date).getFullYear();
   const month = new Date(date).getMonth() + 1;
 
-  const newBalance = type === "income" ? userBalance + sum : userBalance - sum;
-  
+  const fixedSum = sum.toFixed(2);
+  const newBalance =
+    type === "income" ? userBalance + fixedSum : userBalance - fixedSum;
+
   if (newBalance < 0) {
     throw requestError(400, "your balance is less than the transaction amount");
   }
 
   const transaction = await Transaction.create({
     ...req.body,
+    sum: fixedSum,
     owner: _id,
     balanceAfterTransaction: newBalance,
     month,
@@ -29,10 +32,9 @@ const add = async (req, res) => {
     });
     if (updatedUser) {
       res.status(201).json({
-        data: {
           transaction,
         },
-      });
+      );
     }
   }
 };

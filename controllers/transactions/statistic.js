@@ -52,6 +52,7 @@ const statistic = async (req, res) => {
       },
     },
   ]);
+  
   res.json({
     allCategories,
     typesTotalSum,

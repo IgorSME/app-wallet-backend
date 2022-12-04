@@ -13,6 +13,7 @@ const refresh = async (req, res, next) => {
     if (!user || user.refreshToken !== refreshToken) {
       throw requestError(401, "Token expired");
     }
+
     const { accessToken: newAccessToken, refreshToken: newRefreshToken } =
       createTokens(id);
 
@@ -20,10 +21,12 @@ const refresh = async (req, res, next) => {
       accessToken: newAccessToken,
       refreshToken: newRefreshToken,
     });
+
     res.json({
       accessToken: newAccessToken,
       refreshToken: newRefreshToken,
     });
+    
   } catch (error) {
     next(requestError(401, error.message));
   }
