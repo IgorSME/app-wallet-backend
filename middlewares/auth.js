@@ -12,9 +12,10 @@ const auth = async (req, res, next) => {
       throw requestError(401, "Not authorized");
     }
     const { id } = jwt.verify(token, SECRET_KEY_ACCESS);
-    const user = await User.findById(id).populate(
-      "userTransaction userCategory"
-    );
+    const user = await User.findById(id).populate([
+      "userTransaction userCategory",
+      { path: "userTransaction", options: { sort: { date: -1 } } },
+    ]);
 
     if (!user) {
       throw requestError(401, "Not authorized");
@@ -23,7 +24,7 @@ const auth = async (req, res, next) => {
     if (!user.accessToken) {
       throw requestError(401, "Token expired");
     }
-    
+
     req.user = user;
     next();
   } catch (error) {
