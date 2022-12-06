@@ -815,7 +815,7 @@
             "date": {
             "type": "integer",
             "description": "Transaction date",
-            "example": 1646137500008
+            "format": "date-time"
           },
           "month": {
             "type": "integer",
