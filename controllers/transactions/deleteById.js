@@ -14,10 +14,12 @@ const deleteById = async (req, res) => {
     throw requestError(404, `transaction with id=${idParam} not found`);
   }
 
+  const fixedSum = +transaction.sum?.toFixed(2);
+
   const newBalance =
     transaction?.type === "income"
-      ? (userBalance - transaction.sum).toFixed(2)
-      : (userBalance + transaction.sum).toFixed(2);
+      ? userBalance - fixedSum
+      : userBalance + fixedSum;
 
   await User.findOneAndUpdate(
     { _id },
