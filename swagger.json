@@ -662,9 +662,9 @@
         "required": ["date","type", "category","comment","sum"],
         "properties": {
           "date": {
-            "type": "string",
+            "type": "integer",
             "description": "Transaction date",
-            "example": "1646137500000"
+            "example": 1646137500000
           },
            "type": {
             "type": "string",
@@ -813,9 +813,9 @@
           "type": "object",
           "properties": {
             "date": {
-            "type": "string",
+            "type": "integer",
             "description": "Transaction date",
-            "format": "date-time"
+            "example": 1646137500000
           },
           "month": {
             "type": "integer",
