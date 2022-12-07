@@ -87,7 +87,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/LoginResponse"
+                  "$ref": "#/components/schemas/RegistrationResponse"
                 }
               }
             }
@@ -560,12 +560,14 @@
     "baseCategories": [{
                 "_id": "1",
                 "type": "expense",
+                "color":"#008000",
                 "categoryName": "other"
             }],
     "userCategory": [{
                 "_id": "638b14611a24bc4dfbf82b1a",
                 "type": "expense",
                 "categoryName": "cat",
+                "color":"#009000",
                 "owner": "638b11225c6e2eeb2d95e90e"
             }]
 }]
@@ -713,28 +715,6 @@
               "type": "string",
               "description": "User's email",
               "format": "email"
-            }
-          }
-        },
-        "example": [
-          { "name": "Dan", "email": "1@gmail.com" },
-          { "name": "Ban", "email": "2@gmail.com" }
-        ]
-      },
-      "LoginResponse": {
-        "type": "array",
-        "items": {
-          "type": "object",
-          "properties": {
-            "name": {
-            "type": "string",
-            "description": "User's name",
-            "example": "userName"
-          },
-            "email": {
-              "type": "string",
-              "description": "User's email",
-              "format": "email"
             },
             "accessToken": {
             "type": "string",
@@ -749,8 +729,8 @@
           }
         },
         "example": [
-          {"name":"userName","email": "1@gmail.com", "accessToken":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzODljMmY5OTVhMDI1ZTY0OGViZGI5MyIsImlhdCI6MTY2OTk3Mjk4NiwiZXhwIjoxNjY5OTczODg2fQ.CJBe4RYEIXeFhh2z_ndX2-pjj5a3qXsE5EbUW6lUFrr", "refreshToken":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzODljMmY5OTVhMDI1ZTY0OGViZGI5MyIsImlhdCI6MTY2OTk3Mjk4NiwiZXhwIjoxNjY5OTczODg2fQ.CJBe4RYEIXeFhh2z_ndX2-pjj5a3qXsE5EbUW6lUFqq"},
-          {"email": "2@gmail.com", "accessToken":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzODljMmY5OTVhMDI1ZTY0OGViZGI5MyIsImlhdCI6MTY2OTk3Mjk4NiwiZXhwIjoxNjY5OTczODg2fQ.CJBe4RYEIXeFhh2z_ndX2-pjj5a3qXsE5EbUW6lUFff", "refreshToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzODljMmY5OTVhMDI1ZTY0OGViZGI5MyIsImlhdCI6MTY2OTk3Mjk4NiwiZXhwIjoxNjY5OTczODg2fQ.CJBe4RYEIXeFhh2z_ndX2-pjj5a3qXsE5EbUW6lUFzz" }
+          { "name": "Dan", "email": "1@gmail.com","accessToken":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzODljMmY5OTVhMDI1ZTY0OGViZGI5MyIsImlhdCI6MTY2OTk3Mjk4NiwiZXhwIjoxNjY5OTczODg2fQ.CJBe4RYEIXeFhh2z_ndX2-pjj5a3qXsE5EbUW6lUFrr", "refreshToken":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzODljMmY5OTVhMDI1ZTY0OGViZGI5MyIsImlhdCI6MTY2OTk3Mjk4NiwiZXhwIjoxNjY5OTczODg2fQ.CJBe4RYEIXeFhh2z_ndX2-pjj5a3qXsE5EbUW6lUFqq" },
+          { "name": "Ban", "email": "2@gmail.com","accessToken":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzODljMmY5OTVhMDI1ZTY0OGViZGI5MyIsImlhdCI6MTY2OTk3Mjk4NiwiZXhwIjoxNjY5OTczODg2fQ.CJBe4RYEIXeFhh2z_ndX2-pjj5a3qXsE5EbUW6lUFff", "refreshToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzODljMmY5OTVhMDI1ZTY0OGViZGI5MyIsImlhdCI6MTY2OTk3Mjk4NiwiZXhwIjoxNjY5OTczODg2fQ.CJBe4RYEIXeFhh2z_ndX2-pjj5a3qXsE5EbUW6lUFzz" }
         ]
       },
       "RefreshTokenResponse": {
