@@ -16,6 +16,11 @@ const categorySchema = new Schema(
       minlength: 3,
       unique: true,
     },
+    color: {
+      type: String,
+      required: [true, "Set color"],
+      unique: true,
+    },
     owner: {
       type: Schema.Types.ObjectId,
       ref: "user",
@@ -28,6 +33,7 @@ const categorySchema = new Schema(
 const joyCategorySchema = Joi.object({
   type: Joi.string().required(),
   category: Joi.string().required(),
+  color: Joi.string().required(),
 });
 
 categorySchema.post("save", handleValidateSchemaErrors);

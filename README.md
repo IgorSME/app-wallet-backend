@@ -24,11 +24,15 @@
         password:password*
         } 
 * response :   
-  ``` js
-      user: {
-      name:"userName",*
-      email:"user@gmail.com",*
-    },
+  ``` js  
+  { 
+    user: {
+        name:"userName",*
+        email:"user@gmail.com",*
+        },
+    accessToken:"accessToken**********************************************",
+    refreshToken:"refreshToken*******************************************"
+    }
 -------------------------------------  
 ### login  :key::key::key:
 --------------------------------------------------------
@@ -45,12 +49,14 @@
 
 * response :
 ``` js 
-        data: {
-            name: "userName",
-            email:"user@gmail.com",
-            accessToken:"accessToken**********************************************",
-            refreshToken:"refreshToken*******************************************"
-            },
+     { 
+    user: {
+        name:"userName",*
+        email:"user@gmail.com",*
+        },
+    accessToken:"accessToken**********************************************",
+    refreshToken:"refreshToken*******************************************"
+    }
    
 ```
 ----------------------------------------------
@@ -268,74 +274,87 @@
 ## CATEGORIES
 Base category
 
-    [
-    {
-        "_id": "1",
-        "type": "expense",
-        "categoryName":"Main expenses"
-    },
-    {
-        "_id": "2",
-        "type": "expense",
-        "categoryName": "Products"
-    },
-    {
-        "_id": "3",
-        "type": "expense",
-        "categoryName": "Car"
-    },
-    {
-        "_id": "4",
-        "type": "expense",
-        "categoryName": "Self care"
-    },
-    {
-        "_id": "5",
-        "type": "expense",
-        "categoryName": "ЗСУ"
-    },
+        [
         {
-            "_id": "6",
+            "_id": "1",
             "type": "expense",
-            "categoryName": "Education"
+            "color": "#FED057",
+            "categoryName":"Main expenses"
         },
         {
-            "_id": "7",
+            "_id": "2",
             "type": "expense",
-            "categoryName": "Entertainment"
+            "color": "#FFD8D0",
+            "categoryName": "Products"
         },
         {
-            "_id": "8",
+            "_id": "3",
             "type": "expense",
-            "categoryName": "Other expenses"
+            "color": "#FD9498",
+            "categoryName": "Car"
         },
         {
-            "_id": "9",
+            "_id": "4",
             "type": "expense",
-            "categoryName": "Leisure"
+            "color": "#C5BAFF",
+            "categoryName": "Self care"
         },
         {
-            "_id": "10",
+            "_id": "5",
             "type": "expense",
-            "categoryName": "Household products"
+            "color": "#2F8B57",
+            "categoryName": "ЗСУ"
+        },
+            {
+                "_id": "6",
+                "type": "expense",
+                "color": "#81E1FF",
+                "categoryName": "Education"
+            },
+            {
+                "_id": "7",
+                "type": "expense",
+                "color": "#00AD84",
+                "categoryName": "Entertainment"
+            },
+            {
+                "_id": "8",
+                "type": "expense",
+                "color": "#7CFC00",
+                "categoryName": "Other expenses"
+            },
+            {
+                "_id": "9",
+                "type": "expense",
+                "color": "#24CCA7",
+                "categoryName": "Leisure"
+            },
+            {
+                "_id": "10",
+                "type": "expense",
+                "color": "#4A56E2",
+                "categoryName": "Household products"
+            },
+            {
+                "_id": "11",
+                "type": "expense",
+                "color": "#6E78E8",
+                "categoryName": "Child care"
+            },
+        {
+            "_id": "12",
+            "type": "income",
+            "color": "#008000",
+            "categoryName": "regular"
         },
         {
-            "_id": "11",
-            "type": "expense",
-            "categoryName": "Child care"
-        },
-    {
-        "_id": "12",
-        "type": "income",
-        "categoryName": "regular"
-    },
-    {
-        "_id": "13",
-        "type": "income",
-        "categoryName": "irregular"
-    }
-   
-]
+            "_id": "13",
+            "type": "income",
+            "color": "#006400",
+            "categoryName": "irregular"
+        }
+
+        ]
 
 ------------------------
 ### add :pencil2:
@@ -348,6 +367,7 @@ Base category
 {
     	"type": "income",`("expense"||"income")`*
     	"categoryName": "newCategoryName"*
+        "color":"#123456"*
 }
 ```
 * response:
@@ -355,6 +375,7 @@ Base category
    "category": {
         "type": "income",
         "categoryName": "newCategoryName",
+        "color":"#123456",
         "owner": "638b11225c6e2eeb2d95e90e",
         "_id": "638b14be1a24bc4dfbf82b2e"
     }

@@ -2,67 +2,86 @@
     {
         "_id": "1",
         "type": "expense",
+          "color": "#FED057",
         "categoryName":"Main expenses"
     },
     {
         "_id": "2",
         "type": "expense",
+        "color": "#FFD8D0",
         "categoryName": "Products"
     },
     {
         "_id": "3",
         "type": "expense",
+        "color": "#FD9498",
         "categoryName": "Car"
     },
     {
         "_id": "4",
         "type": "expense",
+        "color": "#C5BAFF",
         "categoryName": "Self care"
     },
     {
         "_id": "5",
         "type": "expense",
+        "color": "#2F8B57",
         "categoryName": "ЗСУ"
     },
         {
             "_id": "6",
             "type": "expense",
+            "color": "#81E1FF",
             "categoryName": "Education"
         },
         {
             "_id": "7",
             "type": "expense",
+            "color": "#00AD84",
             "categoryName": "Entertainment"
         },
         {
             "_id": "8",
             "type": "expense",
+            "color": "#7CFC00",
             "categoryName": "Other expenses"
         },
         {
             "_id": "9",
             "type": "expense",
+            "color": "#24CCA7",
             "categoryName": "Leisure"
         },
         {
             "_id": "10",
             "type": "expense",
+            "color": "#4A56E2",
             "categoryName": "Household products"
         },
         {
             "_id": "11",
             "type": "expense",
+            "color": "#6E78E8",
             "categoryName": "Child care"
         },
     {
         "_id": "12",
         "type": "income",
+        "color": "#008000",
         "categoryName": "regular"
     },
     {
         "_id": "13",
         "type": "income",
+        "color": "#006400",
         "categoryName": "irregular"
     }
    
 ]
+
+
+
+
+
+
