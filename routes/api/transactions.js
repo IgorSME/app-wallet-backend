@@ -9,6 +9,6 @@ router.post("/", auth, validation(joiTransactionSchema), ctrlWrapper(ctrl.add));
 router.get("/", auth, ctrlWrapper(ctrl.getAll));
 router.get("/statistic", auth, ctrlWrapper(ctrl.statistic));
 router.patch("/:idParam", auth, isValidId, validation(joiUpdateCommentSchema), ctrlWrapper(ctrl.updateComment));
-router.delete("/:idParam", auth, isValidId, ctrlWrapper(ctrl.deleteById));
+
 
 module.exports = router;
