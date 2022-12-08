@@ -13,8 +13,9 @@ const auth = async (req, res, next) => {
     }
     const { id } = jwt.verify(token, SECRET_KEY_ACCESS);
     const user = await User.findById(id).populate([
-      "userTransaction userCategory",
-      { path: "userTransaction", options: { sort: { date: -1 } } },
+      "userTransactions",
+      { path: "userTransactions", options: { sort: { date: -1 } } },
+      "userCategories",
     ]);
 
     if (!user) {

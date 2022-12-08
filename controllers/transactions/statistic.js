@@ -25,7 +25,8 @@ const statistic = async (req, res) => {
       $project: {
         _id: 0,
         categoryName: "$_id.category",
-        totalSum: "$totalSum",
+        totalSum: { $round : [ "$totalSum", 2 ] },
+     
       },
     },
   ]);
@@ -48,7 +49,7 @@ const statistic = async (req, res) => {
       $project: {
         _id: 0,
         typeName: "$_id.type",
-        totalSum: "$totalSum",
+        totalSum: { $round: ["$totalSum", 2] },
       },
     },
   ]);

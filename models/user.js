@@ -18,12 +18,12 @@ const userSchema = new Schema(
       required: [true, "Email is required"],
       unique: true,
     },
-    userTransaction: {
+    userTransactions: {
       type: Array,
       default: [],
       ref: "transaction",
     },
-    userCategory: {
+    userCategories: {
       type: Array,
       default: [],
       ref: "category",

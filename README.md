@@ -103,13 +103,13 @@
              name:"userName",
             email:"user@gmail.com",
             userBalance:userBalance,
-            userCategory:[    {
+            userCategories:[    {
                 "_id": "638b14611a24bc4dfbf82b1a",
                 "type": "expense",
                 "categoryName": "cat",
                 "owner": "638b11225c6e2eeb2d95e90e"
             }]
-            transactions:[ "transaction": {
+            userTransactions:[ "transaction": {
         "_id": "638b11ed5c6e2eeb2d95e91f",
         "date": "2022-12-01T12:25:00.000Z",
         "month": 12,
@@ -196,20 +196,6 @@
     }
 ```
 ------------------------------------------
-### delete :wastebasket:
-----------------------------------------
-`/api/transactions/:transactionId`
--------------------------------------------
-* method:DELETE
-* response:
-``` js
-{
-    "message": "transaction deleted",
-    userBalance:newUserBalance
-}
-```
-------------------------------------------
-
 ### get all  :clipboard:
 ------------------------------------------------
 `/api/transactions`
@@ -272,7 +258,7 @@
 ```
 ----------------------------------------
 ## CATEGORIES
-Base category
+Base categories
 
         [
         {
@@ -410,7 +396,7 @@ Base category
                 "categoryName": "other"
             },
         ],
-        "userCategory": [
+        "userCategories": [
             {
                 "_id": "638b14611a24bc4dfbf82b1a",
                 "type": "expense",

@@ -27,7 +27,7 @@ const add = async (req, res) => {
 
   if (transaction) {
     const updatedUser = await User.findByIdAndUpdate(_id, {
-      $push: { userTransaction: transaction._id },
+      $push: { userTransactions: transaction._id },
       userBalance: newBalance,
     });
     if (updatedUser) {

@@ -1,13 +1,13 @@
 const current = async (req, res) => {
-  const { name, email, userBalance, userCategory, userTransaction } = req.user;
+  const { name, email, userBalance, userCategories, userTransactions } = req.user;
 
   res.json({
     user: {
       name,
       email,
       userBalance,
-      userCategory,
-      userTransaction,
+      userCategories,
+      userTransactions,
     },
   });
 };
