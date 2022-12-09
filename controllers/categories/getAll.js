@@ -3,11 +3,11 @@ const path = require("path")
 
 
 const getAll = async (req, res) => {
-    const {userCategory} = req.user
+    const {userCategories} = req.user
     const data= await fs.readFile(path.join(__dirname ,"../../","models", "baseCategories.json"));
     const baseCategories = JSON.parse(data)
     res.json({
-    baseCategories, userCategory ,
+    baseCategories, userCategories,
     });
 };
 module.exports = getAll;

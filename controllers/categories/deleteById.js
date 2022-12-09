@@ -15,7 +15,7 @@ const deleteById = async (req, res) => {
   }
 
   await User.findByIdAndUpdate(_id, {
-    $pull: { userCategory: category._id },
+    $pull: { userCategories: category._id },
   });
   
   res.json({
