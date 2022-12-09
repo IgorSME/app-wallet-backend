@@ -303,39 +303,6 @@
             "content": {}
           }
         }
-      },
-      "delete": {
-        "tags": ["Transactions"],
-        "summary": "Delete transaction",
-        "parameters": [{
-          "in": "path",
-          "name":"idParam",
-          "required": true,
-          "type": "string",
-          "description":"Transaction's id"
-        }],
-        "security": [{ "Bearer": [] }],
-        
-        "responses": {
-          "200": {
-            "description": "Successful operation",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/DeleteTransactionResponse"
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "Bad request (id is not correct)",
-            "content": {}
-          },
-          "401": {
-            "description": "Not authorized (invalid token)",
-            "content": {}
-          }
-        }
       }
     },
     "/api/categories": {
@@ -533,13 +500,6 @@
             "totalSum": 30000
         }
     ]
-}]
-    },
-     "DeleteTransactionResponse":{
-      "type": "array",
-      "example":[{
-    "message": "transaction deleted",
-    "newBalance": 24000
 }]
     },
      "DeleteCategoryResponse":{
@@ -773,13 +733,13 @@
             "description": "User's balance",
             "example": "1234"
           },
-          "userCategory": {
+          "userCategories": {
             "type": "array",
             "items": {"type":"object"},
             "description": "User's category",
             "example": [{"Income":"Salary"}]
           },
-          "userTransaction": {
+          "userTransactions": {
             "type": "array",
             "items": {"type":"object"},
             "description": "User's transaction",
