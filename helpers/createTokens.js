@@ -1,8 +1,9 @@
-const jwt= require("jsonwebtoken");
+const jwt = require("jsonwebtoken");
 
-const { SECRET_KEY_ACCESS = "", SECRET_KEY_REFRESH="" } = process.env;
+const { SECRET_KEY_ACCESS = "", SECRET_KEY_REFRESH = "" } = process.env;
 
 const createToken = (_id) => {
+
     const payload = {
         id: _id
     }
@@ -15,3 +16,4 @@ const createToken = (_id) => {
     return { accessToken, refreshToken }
 }
 module.exports= createToken
+
