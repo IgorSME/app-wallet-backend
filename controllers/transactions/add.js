@@ -9,8 +9,11 @@ const add = async (req, res) => {
   const month = new Date(date).getMonth() + 1;
 
   const fixedSum = Number(sum).toFixed(2);
+
   const newBalance =
-    type === "income" ? userBalance + fixedSum : userBalance - fixedSum;
+    type === "income"
+      ? userBalance + Number(fixedSum)
+      : userBalance - Number(fixedSum);
 
   if (newBalance < 0) {
     throw requestError(400, "your balance is less than the transaction amount");
@@ -20,7 +23,7 @@ const add = async (req, res) => {
     ...req.body,
     sum: fixedSum,
     owner: _id,
-    balanceAfterTransaction: newBalance?.toFixed(2),
+    balanceAfterTransaction: newBalance,
     month,
     year,
   });
