@@ -203,7 +203,14 @@
 `/api/transactions?page=<номер сторінки>&limit=<кількість на сторінці >`
 ----------------------------------------------------
 * method:GET
-* response :"transactions": []
+* response :
+``` js
+  { transactions: [],
+    userBalance:userBalance,
+    totalPages:quantity pages,
+  }
+```
+
 
  #### Example transaction in response
  ---------------------------------------------------------------
