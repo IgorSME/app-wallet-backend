@@ -14,6 +14,7 @@ const getAll = async (req, res) => {
   res.json({
     transactions,
     userBalance,
+    page,
     totalPages,
   });
 };
