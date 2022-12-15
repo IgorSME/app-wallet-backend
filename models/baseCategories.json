@@ -69,13 +69,13 @@
         "_id": "12",
         "type": "income",
         "color": "#008000",
-        "categoryName": "regular"
+        "categoryName": "Regular"
     },
     {
         "_id": "13",
         "type": "income",
         "color": "#006400",
-        "categoryName": "irregular"
+        "categoryName": "Irregular"
     }
    
 ]
